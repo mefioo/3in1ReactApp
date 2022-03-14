@@ -1,0 +1,11 @@
+.display {
+	border-radius: 10px;
+	width: 70%;
+	height: 30px;
+	margin: 30px 0;
+	background-color: lightgrey;
+	color: rgb(88, 88, 88);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
