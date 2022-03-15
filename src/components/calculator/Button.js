@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { calcActions } from '../../store/calc';
 
 const factorial = (num) => {
-	console.log(num);
 	if (num <= 1) {
 		return 1;
 	} else {
@@ -71,6 +70,7 @@ const Button = (props) => {
 	};
 
 	const buttonClickHandler = () => {
+		let result;
 		if (
 			isJustCalculated &&
 			(Number.isInteger(+props.value) || props.value === '←')
@@ -95,7 +95,7 @@ const Button = (props) => {
 					dispatch(calcActions.changeLastChar(''));
 				}
 				break;
-			case '.': //here todo - two dots in one number
+			case '.':
 				if (!chechIfValidDot(calc)) {
 					break;
 				}
@@ -105,8 +105,10 @@ const Button = (props) => {
 					: dispatch(calcActions.addChar('0' + props.value));
 
 				break;
-			case '=': //here todo 0.1 + 0.2 - mathjs
-				dispatch(calcActions.changeDisplay(calculate()));
+			case '=':
+				result = calculate();
+				result = result.length >= 12 ? result.slice(0, 12) : result;
+				dispatch(calcActions.changeDisplay(result));
 				break;
 			case '(':
 				if (lastDisplayedChar === '0') {
@@ -126,14 +128,16 @@ const Button = (props) => {
 				}
 				break;
 			case 'n!':
-				const result = calculate();
-				dispatch(calcActions.changeDisplay(`${factorial(result)}`));
+				result = factorial(calculate()).toString();
+				result = result.length >= 12 ? result.slice(0, 12) : result;
+				dispatch(calcActions.changeDisplay(`${result}`));
 				break;
 			default:
 				if (
 					lastDisplayedChar &&
 					!isLastCharNumber &&
-					!Number.isInteger(+props.value)
+					!Number.isInteger(+props.value) &&
+					lastDisplayedChar !== ')'
 				) {
 					dispatch(calcActions.changeLastChar(props.value));
 					break;
@@ -148,7 +152,10 @@ const Button = (props) => {
 	};
 
 	return (
-		<button onClick={buttonClickHandler} className={classes.button}>
+		<button
+			onClick={buttonClickHandler}
+			className={classes.button + ' ' + props.className}
+		>
 			{props.value}
 		</button>
 	);

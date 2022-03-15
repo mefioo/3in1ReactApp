@@ -1,4 +1,5 @@
 import NavElement from './NavElement';
+import classes from './Navigation.module.css';
 
 const NAV_ELEMENTS = [
 	{ data: 'Calculator', targetRoute: '/calculator', id: 'l1' },
@@ -15,7 +16,7 @@ const Navigation = (props) => {
 		></NavElement>
 	));
 
-	return <ul>{navElements}</ul>;
+	return <ul className={classes.list}>{navElements}</ul>;
 };
 
 export default Navigation;

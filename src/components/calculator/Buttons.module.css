@@ -1,6 +1,36 @@
 .buttons {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	margin: 2rem 0;
-	width: 70%;
+	justify-content: center;
+	align-content: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	margin: 1rem;
+	width: auto;
+	grid-template-areas:
+		'a1 a2 a3 a4 a5'
+		'b1 b2 b3 b4 b5'
+		'c1 c2 c3 c4 c5'
+		'd1 d2 d3 d4 d5'
+		'e1 e1 e2 e2 e2';
+}
+
+.buttons .buttons--orange {
+	background-color: rgb(211, 137, 0);
+}
+
+.buttons .buttons--red {
+	background-color: rgb(173, 46, 46);
+}
+
+.buttons .buttons__extended--two {
+	grid-area: e1;
+	width: calc(100% - 20px);
+	margin: 5px 2px;
+	border-radius: 150px;
+}
+
+.buttons .buttons__extended--three {
+	grid-area: e2;
+	width: calc(100% - 20px);
+	margin: 5px 2px;
+	border-radius: 200px;
 }

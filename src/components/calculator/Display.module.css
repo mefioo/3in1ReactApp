@@ -1,11 +1,16 @@
 .display {
-	border-radius: 10px;
 	width: 70%;
-	height: 30px;
-	margin: 30px 0;
-	background-color: lightgrey;
-	color: rgb(88, 88, 88);
+	height: auto;
+	margin: 10px 0;
+	border-bottom: 1px solid white;
+	color: rgb(209, 209, 209);
+	font-size: 50px;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: end;
+	text-align: right;
+}
+
+.display p {
+	margin-bottom: 0;
 }
