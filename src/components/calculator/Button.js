@@ -114,7 +114,11 @@ const Button = (props) => {
 				if (lastDisplayedChar === '0') {
 					dispatch(calcActions.replaceZero(props.value));
 				}
-				if (isLastCharNumber || lastDisplayedChar === ')') {
+				if (
+					isLastCharNumber ||
+					lastDisplayedChar === ')' ||
+					lastDisplayedChar === '.'
+				) {
 					break;
 				}
 				dispatch(calcActions.addChar(props.value));
@@ -133,6 +137,9 @@ const Button = (props) => {
 				dispatch(calcActions.changeDisplay(`${result}`));
 				break;
 			default:
+				if (lastDisplayedChar === ')' && Number.isInteger(+props.value)) {
+					break;
+				}
 				if (
 					lastDisplayedChar &&
 					!isLastCharNumber &&

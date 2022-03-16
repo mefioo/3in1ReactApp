@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Calculator from '../../pages/Calculator';
+import Weather from '../../pages/Weather';
 import classes from './Main.module.css';
 
 const Main = () => {
@@ -12,7 +13,7 @@ const Main = () => {
 				></Route>
 				<Route path='/calculator' element={<Calculator></Calculator>}></Route>
 				<Route path='/todo' element={<p>Page under construction</p>}></Route>
-				<Route path='/weather' element={<p>Page under construction</p>}></Route>
+				<Route path='/weather' element={<Weather></Weather>}></Route>
 			</Routes>
 		</main>
 	);
