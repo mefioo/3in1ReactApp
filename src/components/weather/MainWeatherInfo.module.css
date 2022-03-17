@@ -1,0 +1,35 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: space-between;
+	width: 400px;
+	height: 60%;
+	color: white;
+}
+
+.info {
+	margin: 2rem 5rem;
+	text-align: left;
+}
+
+.info--right {
+	text-align: right;
+}
+
+.day {
+	margin: 0;
+	font-size: 40px;
+}
+
+.date {
+}
+
+.temp {
+	margin: 0;
+	font-size: 3rem;
+}
+
+.icon {
+	font-size: 50px;
+}

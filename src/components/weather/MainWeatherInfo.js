@@ -1,16 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import classes from './WeatherInfoCard.module.css';
 
-const WeatherInfoCard = (props) => {
-	const infoClassNames = props.className
-		.split(' ')
-		.map((className) => classes[className])
-		.join(' ');
-	console.log(infoClassNames);
+import classes from './MainWeatherInfo.module.css';
 
+const MainWeatherInfo = (props) => {	
 	return (
-		<div className={infoClassNames}>
+		<div className={classes.main}>
 			<div className={classes.info}>
 				<p className={classes.day}>{props.weatherData.day}</p>
 				<p>{`${props.weatherData.date}, ${props.weatherData.time}`}</p>
@@ -32,4 +27,4 @@ const WeatherInfoCard = (props) => {
 	);
 };
 
-export default WeatherInfoCard;
+export default MainWeatherInfo;

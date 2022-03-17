@@ -1,0 +1,30 @@
+.weather {
+	margin-top: 5%;
+	border-radius: 50px;
+	width: 400px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background: url('https://cdn.pixabay.com/photo/2018/09/07/05/33/lines-3659995_960_720.jpg');
+}
+
+.weather--middle {
+	transform: scale(0.92);
+	-webkit-box-shadow: 0px 15px 24px -5px rgba(0, 0, 0, 1);
+	-moz-box-shadow: 0px 15px 24px -5px rgba(0, 0, 0, 1);
+	box-shadow: 0px 15px 24px -5px rgba(0, 0, 0, 1);
+	background: url('../../img/wroclaw.jpg');
+}
+
+.weather--leftspin {
+	transform: perspective(1000px) rotateY(-20deg);
+	-webkit-box-shadow: 8px 15px 24px -5px rgba(0, 0, 0, 1);
+	-moz-box-shadow: 8px 15px 24px -5px rgba(0, 0, 0, 1);
+	box-shadow: 8px 15px 24px -5px rgba(0, 0, 0, 1);
+}
+
+.weather--rightspin {
+	transform: perspective(1000px) rotateY(20deg);
+	-webkit-box-shadow: -8px 15px 24px -5px rgba(0, 0, 0, 1);
+	-moz-box-shadow: -8px 15px 24px -5px rgba(0, 0, 0, 1);
+	box-shadow: -8px 15px 24px -5px rgba(0, 0, 0, 1);
+}
