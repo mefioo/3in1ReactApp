@@ -2,7 +2,7 @@ import classes from './Button.module.css';
 import { evaluate, format } from 'mathjs';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { calcActions } from '../../store/calc';
+import { calcActions } from '../../store/calc-slice';
 
 const factorial = (num) => {
 	if (num <= 1) {

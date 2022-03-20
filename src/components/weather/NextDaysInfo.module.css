@@ -1,5 +1,6 @@
 .info {
 	height: 100%;
+	max-width: 385px;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr;
 }

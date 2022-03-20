@@ -4,6 +4,7 @@ import Flexbox from '../UI-helpers/Flexbox';
 import MainWeatherInfo from './MainWeatherInfo';
 import DetailedInfo from './DetailedInfo';
 import NextDaysInfo from './NextDaysInfo';
+
 import {
 	faCloudRain,
 	faWind,
@@ -12,30 +13,52 @@ import {
 	faWater,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getWeatherData } from '../../store/weather-actions';
 
 const CurrentWeather = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getWeatherData('Wroclaw'));
+	}, [dispatch]);
+
+	const data = useSelector((state) => state.weather);
+	console.log(data);
 	const weatherData = {
-		day: 'Wednesday',
-		date: '16 Mar 2022',
-		time: '17:30',
-		location: { city: 'Wroclaw', country: 'PL' },
-		temp: '29',
+		day: data.today.day,
+		date: data.today.date,
+		time: data.today.time,
+		location: { city: data.today.city, country: data.today.country },
+		temp: data.today.temp,
 		unit: 'C',
-		overallWeather: 'Sunny',
+		overallWeather: data.today.overallWeather,
 	};
+
 	const elements = [
-		{ icon: <FontAwesomeIcon icon={faCloudRain} />, text: '22mm' },
-		{ icon: <FontAwesomeIcon icon={faWind} />, text: '32km/h' },
-		{ icon: <FontAwesomeIcon icon={faCompass} />, text: 'North-West' },
-		{ icon: <FontAwesomeIcon icon={faTachometer} />, text: '1023 hPa' },
-		{ icon: <FontAwesomeIcon icon={faWater} />, text: '45%' },
+		{
+			icon: <FontAwesomeIcon icon={faCloudRain} />,
+			text: `${data.today.rain} mm`,
+		},
+		{
+			icon: <FontAwesomeIcon icon={faWind} />,
+			text: `${data.today.windSpeed} km/h`,
+		},
+		{
+			icon: <FontAwesomeIcon icon={faCompass} />,
+			text: data.today.windDirection,
+		},
+		{
+			icon: <FontAwesomeIcon icon={faTachometer} />,
+			text: `${data.today.pressure} hPa`,
+		},
+		{
+			icon: <FontAwesomeIcon icon={faWater} />,
+			text: `${data.today.humidity}%`,
+		},
 	];
-	const nextDaysInfo = [
-		{ day: 'Thursday', date: '17 Mar', temp: '22°C', rain: '0 mm' },
-		{ day: 'Friday', date: '18 Mar', temp: '21°C', rain: '2 mm' },
-		{ day: 'Saturday', date: '19 Mar', temp: '24°C', rain: '0 mm' },
-		{ day: 'Sunday', date: '20 Mar', temp: '25°C', rain: '0 mm' },
-	];
+
 	return (
 		<Card>
 			<Flexbox className='flex--row'>
@@ -48,7 +71,7 @@ const CurrentWeather = () => {
 					<MainWeatherInfo weatherData={weatherData} />
 				</WeatherInfoCard>
 				<WeatherInfoCard className='weather weather--leftspin'>
-					<NextDaysInfo elements={nextDaysInfo} />
+					<NextDaysInfo data={data.stats} />
 				</WeatherInfoCard>
 			</Flexbox>
 		</Card>

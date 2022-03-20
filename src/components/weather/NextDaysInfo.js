@@ -1,20 +1,21 @@
-import NextDayInfo from './NextDayInfo';
-
 import classes from './NextDaysInfo.module.css';
+import LineChart from './LineChart';
 
 const NextDaysInfo = (props) => {
-	const nextDaysWeatherInfo = props.elements.map((element, index) => {
-		return (
-			<NextDayInfo
-				key={index}
-				day={element.day}
-				date={element.date}
-				temp={element.temp}
-				rain={element.rain}
-			></NextDayInfo>
-		);
-	});
-	return <div className={classes.info}>{nextDaysWeatherInfo}</div>;
+	return (
+		<div className={classes.info}>
+			<LineChart
+				labels={props.data.labels}
+				data={props.data.data.temp}
+				title='Temperature (°C)'
+			/>
+			<LineChart
+				labels={props.data.labels}
+				data={props.data.data.rain}
+				title='Rain (mm)'
+			/>
+		</div>
+	);
 };
 
 export default NextDaysInfo;
