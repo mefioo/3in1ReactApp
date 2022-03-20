@@ -1,4 +1,5 @@
 import { weatherActions } from './weather-slice';
+import { API_KEY } from '../to-ignore';
 
 const weekDays = [
 	'Sunday',
@@ -61,8 +62,7 @@ export const getWeatherData = (city) => {
 		const currentTime = `${date.getHours()}:${minutes}`;
 		const day = weekDays[date.getDay()];
 
-		const apiKey = 'c7dd970fe5a8527b70bf791b78be75cd';
-		const link = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+		const link = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
 
 		const fetchData = async () => {
 			const response = await fetch(link);
