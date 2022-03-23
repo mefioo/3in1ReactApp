@@ -1,0 +1,56 @@
+.form-wrapper {
+	margin-top: 5%;
+	width: 40%;
+	height: 200px;
+	position: relative;
+}
+
+.form {
+	font-size: 40px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	opacity: 0.5;
+}
+
+.form label {
+	margin-left: -30%;
+}
+
+.form input,
+.form input:focus {
+	border-radius: 10px;
+	font-size: 30px;
+	background: transparent;
+	border: none;
+	text-align: right;
+	border-bottom: solid 1px black;
+}
+
+.form input:focus {
+	outline: none;
+	background-color: darkgrey;
+}
+
+.controls button {
+	font-size: 20px;
+	margin-left: 60px;
+	background: none;
+	border: none;
+}
+
+.overlay {
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #fff;
+	-webkit-box-shadow: inset 0px 0px 42px 6px rgba(66, 68, 90, 1);
+	-moz-box-shadow: inset 0px 0px 42px 6px rgba(66, 68, 90, 1);
+	box-shadow: inset 0px 0px 42px 6px rgba(66, 68, 90, 1);
+}

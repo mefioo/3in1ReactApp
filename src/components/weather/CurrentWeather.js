@@ -10,12 +10,13 @@ import {
 	faWind,
 	faCompass,
 	faTachometer,
-	faWater,
+	faDroplet,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getWeatherData } from '../../store/weather-actions';
+import LocationForm from './LocationForm';
 
 const CurrentWeather = () => {
 	const dispatch = useDispatch();
@@ -25,7 +26,6 @@ const CurrentWeather = () => {
 	}, [dispatch]);
 
 	const data = useSelector((state) => state.weather);
-	console.log(data);
 	const weatherData = {
 		day: data.today.day,
 		date: data.today.date,
@@ -54,7 +54,7 @@ const CurrentWeather = () => {
 			text: `${data.today.pressure} hPa`,
 		},
 		{
-			icon: <FontAwesomeIcon icon={faWater} />,
+			icon: <FontAwesomeIcon icon={faDroplet} />,
 			text: `${data.today.humidity}%`,
 		},
 	];
@@ -73,6 +73,9 @@ const CurrentWeather = () => {
 				<WeatherInfoCard className='weather weather--leftspin'>
 					<NextDaysInfo data={data.stats} />
 				</WeatherInfoCard>
+			</Flexbox>
+			<Flexbox className='flex--row'>
+				<LocationForm />
 			</Flexbox>
 		</Card>
 	);

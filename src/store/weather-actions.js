@@ -41,12 +41,13 @@ const determineWindDirection = (deg) => {
 const getNeccessaryStats = (arr) => {
 	let labels = [];
 	let data = { temp: [], rain: [] };
-	console.log(arr);
 	for (let i = 0; i < 10; i++) {
 		data.temp.push(`${parseInt(arr[i].main.temp - 273)}`);
-		data.rain.push(`${arr[i].rain || []}`);
+		data.rain.push(`${arr[i].rain ? arr[i].rain['3h'] : []}`);
 		labels.push(arr[i].dt_txt.split(' ')[1].slice(0, -3));
 	}
+
+	console.log(data);
 
 	return { labels, data };
 };
@@ -80,7 +81,7 @@ export const getWeatherData = (city) => {
 			dispatch(
 				weatherActions.changeWeatherData({
 					today: {
-						city: 'Wroclaw',
+						city: city,
 						country: data.city.country,
 						date: todaysDate,
 						time: currentTime,
@@ -91,7 +92,7 @@ export const getWeatherData = (city) => {
 						windSpeed: parseInt(data.list[0].wind.speed),
 						windDirection: determineWindDirection(data.list[0].wind.deg),
 						humidity: data.list[0].main.humidity,
-						rain: data.list[0].rain || 0,
+						rain: data.list[0].rain ? data.list[0].rain['3h'] : 0,
 					},
 					stats: getNeccessaryStats(data.list),
 				})
