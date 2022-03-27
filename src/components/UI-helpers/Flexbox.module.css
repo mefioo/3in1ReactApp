@@ -1,12 +1,12 @@
 .flex--row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
 
 .flex--column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
 }

@@ -1,0 +1,22 @@
+.content {
+	height: 80%;
+	width: 90%;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.content div {
+	width: 100%;
+	height: 100%;
+}
+
+.border--right {
+	border-right: 2px solid white;
+}
+
+.not-current-month {
+	color: rgb(128, 128, 128);
+}

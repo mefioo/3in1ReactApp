@@ -1,8 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getDateAndTimeInfo } from '../dateAndTimeHelpers';
 
 const initialState = {
-	today: '',
-	stats: { data: { temp: [], rain: [] }, labels: [] },
+	location: {
+		city: 'Wroclaw',
+		country: 'PL',
+	},
+	timeline: getDateAndTimeInfo(),
+	todayStats: {
+		overallWeather: '-',
+		temp: '-',
+		pressure: '-',
+		windSpeed: '-',
+		windDirection: '-',
+		humidity: '-',
+		rain: '-',
+	},
+	nextHoursStats: { data: { temp: [], rain: [] }, labels: [] },
 };
 
 const weatherSlice = createSlice({
@@ -10,8 +24,15 @@ const weatherSlice = createSlice({
 	initialState,
 	reducers: {
 		changeWeatherData(state, action) {
-			state.today = action.payload.today;
-			state.stats = action.payload.stats;
+			state.location = action.payload.location;
+			state.basicInfo = getDateAndTimeInfo();
+			state.todayStats = action.payload.todayStats;
+			state.nextHoursStats = action.payload.nextHoursStats;
+		},
+		showNoData(state) {
+			state.basicInfo = getDateAndTimeInfo();
+			state.todayStats = initialState.todayStats;
+			state.nextHoursStats = initialState.nextHoursStats;
 		},
 	},
 });

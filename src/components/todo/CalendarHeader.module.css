@@ -1,0 +1,22 @@
+.calendar__header {
+	height: 10%;
+	width: 50%;
+	font-size: 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.calendar__header p {
+	margin: 0;
+}
+
+.icon {
+	transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.icon:hover {
+	color: darkgray;
+	transform: scale(1.2);
+}

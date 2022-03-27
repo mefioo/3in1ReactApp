@@ -47,7 +47,7 @@ const Button = (props) => {
 		addMissingClosingBrackets();
 		if (
 			!isLastCharNumber &&
-			lastDisplayedChar !== ',' &&
+			lastDisplayedChar !== '.' &&
 			lastDisplayedChar !== ')'
 		) {
 			try {

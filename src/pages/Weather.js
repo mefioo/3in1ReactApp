@@ -3,11 +3,7 @@ import CurrentWeather from '../components/weather/CurrentWeather';
 import './Weather.module.css';
 
 const Weather = () => {
-	return (
-		<Fragment>
-			<CurrentWeather></CurrentWeather>
-		</Fragment>
-	);
+	return <CurrentWeather />;
 };
 
 export default Weather;

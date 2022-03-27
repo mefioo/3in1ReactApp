@@ -1,0 +1,36 @@
+.switch {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 5%;
+	width: 20%;
+	/* background-color: white; */
+	border-radius: 20px;
+	position: relative;
+	overflow: hidden;
+}
+
+.switch button {
+	width: 55%;
+	height: 100%;
+	line-height: 100%;
+	position: absolute;
+	border: none;
+	background-color: white;
+}
+
+.switch button:nth-child(1) {
+	left: 0;
+}
+
+.switch button:nth-child(2) {
+	right: 0;
+}
+
+.switch button.active {
+	z-index: 1;
+	border-radius: 20px;
+	background-color: rgb(148, 49, 96);
+	color: rgb(187, 118, 172);
+}

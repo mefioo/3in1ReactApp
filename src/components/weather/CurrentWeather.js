@@ -27,35 +27,35 @@ const CurrentWeather = () => {
 
 	const data = useSelector((state) => state.weather);
 	const weatherData = {
-		day: data.today.day,
-		date: data.today.date,
-		time: data.today.time,
-		location: { city: data.today.city, country: data.today.country },
-		temp: data.today.temp,
+		day: data.timeline.weekDay,
+		date: `${data.timeline.date.day} ${data.timeline.date.month}`,
+		time: data.timeline.time,
+		location: { city: data.location.city, country: data.location.country },
+		temp: data.todayStats.temp,
 		unit: 'C',
-		overallWeather: data.today.overallWeather,
+		overallWeather: data.todayStats.overallWeather,
 	};
 
 	const elements = [
 		{
 			icon: <FontAwesomeIcon icon={faCloudRain} />,
-			text: `${data.today.rain} mm`,
+			text: `${data.todayStats.rain} mm`,
 		},
 		{
 			icon: <FontAwesomeIcon icon={faWind} />,
-			text: `${data.today.windSpeed} km/h`,
+			text: `${data.todayStats.windSpeed} km/h`,
 		},
 		{
 			icon: <FontAwesomeIcon icon={faCompass} />,
-			text: data.today.windDirection,
+			text: data.todayStats.windDirection,
 		},
 		{
 			icon: <FontAwesomeIcon icon={faTachometer} />,
-			text: `${data.today.pressure} hPa`,
+			text: `${data.todayStats.pressure} hPa`,
 		},
 		{
 			icon: <FontAwesomeIcon icon={faDroplet} />,
-			text: `${data.today.humidity}%`,
+			text: `${data.todayStats.humidity}%`,
 		},
 	];
 
@@ -71,7 +71,7 @@ const CurrentWeather = () => {
 					<MainWeatherInfo weatherData={weatherData} />
 				</WeatherInfoCard>
 				<WeatherInfoCard className='weather weather--leftspin'>
-					<NextDaysInfo data={data.stats} />
+					<NextDaysInfo data={data.nextHoursStats} />
 				</WeatherInfoCard>
 			</Flexbox>
 			<Flexbox className='flex--row'>

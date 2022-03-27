@@ -1,31 +1,6 @@
 import { weatherActions } from './weather-slice';
+import { errorActions } from './error-slice';
 import { API_KEY } from '../to-ignore';
-
-const weekDays = [
-	'Sunday',
-	'Monday',
-	'Tuesday',
-	'Wednesday',
-	'Thursday',
-	'Friday',
-	'Saturday',
-	'Sunday',
-];
-
-const months = [
-	'Jan',
-	'Feb',
-	'Mar',
-	'Apr',
-	'May',
-	'Jun',
-	'Jul',
-	'Aug',
-	'Sep',
-	'Oct',
-	'Nov',
-	'Dec',
-];
 
 const determineWindDirection = (deg) => {
 	if (deg >= 337.5 || deg < 22.5) return 'North';
@@ -47,29 +22,51 @@ const getNeccessaryStats = (arr) => {
 		labels.push(arr[i].dt_txt.split(' ')[1].slice(0, -3));
 	}
 
-	console.log(data);
-
 	return { labels, data };
+};
+
+const setErrorData = (errorCode) => {
+	let errorData = {};
+	switch (errorCode) {
+		case 401:
+			errorData = {
+				title: 'Unauthorized',
+				code: 401,
+				message:
+					'Could not fetch data from external API. Please make sure your API key is valid and reload the app.',
+				link: 'https://openweathermap.org/api',
+			};
+			break;
+		case 404:
+			errorData = {
+				title: 'City not found',
+				code: 404,
+				message:
+					'We could not find requested city name. Please make sure you inserted the name correctly.',
+			};
+			break;
+		default:
+			errorData = {
+				title: 'Error',
+				code: 0,
+				message:
+					'Some problem occured. Please reload the app or contact the administrator.',
+			};
+			break;
+	}
+	return errorData;
 };
 
 export const getWeatherData = (city) => {
 	return async (dispatch) => {
-		const date = new Date();
-		const todaysDate = `${date.getDate()} ${months[date.getMonth()]}`;
-		const minutes =
-			`${date.getMinutes()}`.length === 1
-				? '0' + date.getMinutes()
-				: date.getMinutes();
-		const currentTime = `${date.getHours()}:${minutes}`;
-		const day = weekDays[date.getDay()];
-
 		const link = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
 
 		const fetchData = async () => {
 			const response = await fetch(link);
 
 			if (!response.ok) {
-				throw new Error('Somethink went wrong!');
+				const errorData = setErrorData(response.status);
+				dispatch(errorActions.setError(errorData));
 			}
 			const data = await response.json();
 			return data;
@@ -80,12 +77,11 @@ export const getWeatherData = (city) => {
 
 			dispatch(
 				weatherActions.changeWeatherData({
-					today: {
+					location: {
 						city: city,
 						country: data.city.country,
-						date: todaysDate,
-						time: currentTime,
-						day,
+					},
+					todayStats: {
 						overallWeather: data.list[0].weather[0].description,
 						temp: parseInt(data.list[0].main.temp - 273),
 						pressure: data.list[0].main.pressure,
@@ -94,11 +90,11 @@ export const getWeatherData = (city) => {
 						humidity: data.list[0].main.humidity,
 						rain: data.list[0].rain ? data.list[0].rain['3h'] : 0,
 					},
-					stats: getNeccessaryStats(data.list),
+					nextHoursStats: getNeccessaryStats(data.list),
 				})
 			);
 		} catch (error) {
-			console.log(error);
+			dispatch(weatherActions.showNoData());
 		}
 	};
 };
