@@ -14,7 +14,6 @@ const LocationForm = () => {
 
 	return (
 		<div className={classes['form-wrapper']}>
-			<div className={classes.overlay}></div>
 			<form className={classes.form} onSubmit={submitHandler}>
 				<label htmlFor='city'>Choose your city</label>
 				<input id='city' ref={city}></input>

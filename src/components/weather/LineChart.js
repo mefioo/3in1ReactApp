@@ -10,9 +10,41 @@ function LineChart(props) {
 	const options = {
 		responsive: true,
 		plugins: {
+			legend: {
+				labels: {
+					color: 'white',
+					font: {
+						size: 14,
+					},
+				},
+			},
 			title: {
 				display: false,
 				text: 'Chart.js Line Chart',
+			},
+		},
+		scales: {
+			y: {
+				grid: {
+					//color: 'white',
+				},
+				ticks: {
+					color: 'white',
+					font: {
+						size: 14,
+					},
+				},
+			},
+			x: {
+				grid: {
+					//color: 'white',
+				},
+				ticks: {
+					color: 'white',
+					font: {
+						size: 14,
+					},
+				},
 			},
 		},
 	};
@@ -23,8 +55,9 @@ function LineChart(props) {
 			{
 				label: props.title,
 				data: props.data,
-				borderColor: 'black',
-				backgroundColor: 'lightgrey',
+				borderColor: 'rgb(127 61 134)',
+				backgroundColor: 'rgb(127 61 134)',
+				color: 'black',
 			},
 		],
 	};

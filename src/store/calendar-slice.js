@@ -3,22 +3,20 @@ import {
 	getDateAndTimeInfo,
 	weekDays,
 	getWeekNumber,
+	getCalendarData,
+	transformCalendarMonthData,
 } from '../dateAndTimeHelpers';
 
-const { JsonCalendar } = require('json-calendar');
-let calendar = new JsonCalendar();
+const calendar = getCalendarData();
 const initialState = {
 	today: getDateAndTimeInfo(),
-	monthData: calendar.weeks.map((week) =>
-		week.map((day) => ({
-			key: day.day,
-			day: day.day,
-			month: day.monthIndex,
-			year: day.year,
-		}))
-	),
+	currentMonthData: {
+		monthData: transformCalendarMonthData(calendar.weeks),
+		firstDayWeekNumber: getWeekNumber(calendar.weeks[0][0]),
+		monthNumberDisplayed: getDateAndTimeInfo().date.month,
+		yearNumberDisplayed: getDateAndTimeInfo().date.year,
+	},
 	weekDays: weekDays,
-	weekNumber: getWeekNumber(calendar.weeks[0][0]),
 };
 
 const calendarSlice = createSlice({
@@ -26,9 +24,13 @@ const calendarSlice = createSlice({
 	initialState: initialState,
 	reducers: {
 		changeCalendarData(state, action) {
-			// calendar = new JsonCalendar();
-			state.today = action.payload.today;
-			state.monthData = action.payload.data;
+			state.currentMonthData.monthData = action.payload.data;
+			state.currentMonthData.monthNumberDisplayed =
+				action.payload.monthNumberDisplayed;
+			state.currentMonthData.yearNumberDisplayed =
+				action.payload.yearNumberDisplayed;
+			state.currentMonthData.firstDayWeekNumber =
+				action.payload.firstDayWeekNumber;
 		},
 	},
 });

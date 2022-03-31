@@ -32,7 +32,11 @@ export const getDateAndTimeInfo = () => {
 	const currentTime = `${date.getHours()}:${minutes}`;
 	const day = weekDays[date.getDay()];
 	return {
-		date: { day: date.getDate(), month: months[date.getMonth()] },
+		date: {
+			day: date.getDate(),
+			month: date.getMonth(),
+			year: date.getFullYear(),
+		},
 		time: currentTime,
 		weekDay: day,
 	};
@@ -47,8 +51,26 @@ export const getWeekNumber = (date) => {
 		firstMonday = new Date(date.year, 0, index);
 		index++;
 	}
-	
+
 	const oneJan = Date.UTC(date.year, 0, 1);
 	const week = Math.ceil((currDate - oneJan) / (1000 * 60 * 60 * 24) / 7);
 	return week;
+};
+
+export const getCalendarData = (date) => {
+	const { JsonCalendar } = require('json-calendar');
+	const calendar = new JsonCalendar(date);
+
+	return calendar;
+};
+
+export const transformCalendarMonthData = (data) => {
+	return data.map((week) =>
+		week.map((day) => ({
+			key: day.day,
+			day: day.day,
+			month: day.monthIndex,
+			year: day.year,
+		}))
+	);
 };

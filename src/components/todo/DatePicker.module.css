@@ -1,0 +1,32 @@
+.picker {
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 25vw;
+	height: 20vh;
+	border-radius: 20px;
+	background: rgba(127, 61, 134, 1);
+}
+
+.dates {
+	display: grid;
+	font-size: 1rem;
+	width: 80%;
+	height: 80%;
+	align-items: center;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.dates button {
+	border: none;
+	background: transparent;
+	color: white;
+	cursor: pointer;
+}
+
+.icon {
+	margin: 0 10px;
+}

@@ -1,14 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { months } from '../../dateAndTimeHelpers';
 import classes from './CalendarContent.module.css';
 import CalendarDateElement from './CalendarDateElement';
 
 const CalendarContent = () => {
 	const calendar = useSelector((state) => state.calendar);
 	const calendarContent = [];
-	let weekNumberIndex = calendar.weekNumber;
-	calendar.monthData.forEach((week) => {
+	let weekNumberIndex = calendar.currentMonthData.firstDayWeekNumber;
+	calendar.currentMonthData.monthData.forEach((week) => {
 		const weekNumber = (
 			<CalendarDateElement
 				key='weekNoInt'
@@ -17,13 +16,22 @@ const CalendarContent = () => {
 			/>
 		);
 		weekNumberIndex++;
+		if (weekNumberIndex > 52) {
+			weekNumberIndex = 1;
+		}
 
 		let weekDays = [];
 		week.forEach((day) => {
 			let className = '';
 
-			if (day.month !== months.indexOf(calendar.today.date.month)) {
+			if (day.month !== calendar.currentMonthData.monthNumberDisplayed) {
 				className = classes['not-current-month'];
+			} else if (
+				calendar.today.date.day === day.day &&
+				calendar.today.date.month === day.month &&
+				calendar.today.date.year === day.year
+			) {
+				className = classes.today;
 			}
 
 			weekDays.push(

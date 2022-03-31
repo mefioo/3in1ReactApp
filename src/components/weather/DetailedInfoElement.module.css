@@ -2,7 +2,8 @@
 	list-style: none;
     font-size: 30px;
     margin-top: 20px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid rgb(127 61 134);
+    color: white;
 }
 
 .item--odd {

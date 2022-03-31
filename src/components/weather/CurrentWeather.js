@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getWeatherData } from '../../store/weather-actions';
 import LocationForm from './LocationForm';
+import { months } from '../../dateAndTimeHelpers';
 
 const CurrentWeather = () => {
 	const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const CurrentWeather = () => {
 	const data = useSelector((state) => state.weather);
 	const weatherData = {
 		day: data.timeline.weekDay,
-		date: `${data.timeline.date.day} ${data.timeline.date.month}`,
+		date: `${data.timeline.date.day} ${months[data.timeline.date.month - 1]}`,
 		time: data.timeline.time,
 		location: { city: data.location.city, country: data.location.country },
 		temp: data.todayStats.temp,

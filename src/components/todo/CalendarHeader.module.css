@@ -17,6 +17,6 @@
 }
 
 .icon:hover {
-	color: darkgray;
+	color: rgb(148, 49, 96);
 	transform: scale(1.2);
 }
