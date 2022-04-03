@@ -1,8 +1,12 @@
 import React from 'react';
 
 const CalendarDateElement = (props) => {
+	const addToDoHandler = () => {
+		props.onClick(props.value);
+	};
+
 	return (
-		<div className={props.className}>
+		<div onClick={addToDoHandler} className={props.className}>
 			<p>{props.value}</p>
 		</div>
 	);

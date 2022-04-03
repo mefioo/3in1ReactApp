@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import classes from './DatePicker.module.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,17 +7,14 @@ import { useSelector } from 'react-redux';
 import PickerOptions from './PickerOptions';
 
 const DatePicker = (props) => {
-	const calendar = useSelector((state) => state.calendar.currentMonthData);
+	const today = useSelector((state) => state.calendar.today);
 
-	const [years, setYears] = useState([]);
+	const initialYears = [...Array(12).keys()].map(
+		(key) => key + parseInt(today.date.year) - 6
+	);
 
-	useEffect(() => {
-		const year = calendar.yearNumberDisplayed;
-		const initialYears = [...Array(12).keys()].map(
-			(key) => parseInt(key) + parseInt(year) - 6
-		);
-		setYears(initialYears);
-	}, [calendar.yearNumberDisplayed]);
+	const [years, setYears] = useState(initialYears);
+	const [showArrows, setShowArrows] = useState(true);
 
 	const dataPickHandler = (pick) => {
 		if (pick) {
@@ -25,13 +22,43 @@ const DatePicker = (props) => {
 		}
 	};
 
+	const previousYearsHandler = () => {
+		const newYears = years.map((year) => year - 12);
+		setYears(newYears);
+	};
+
+	const nextYearsHandler = () => {
+		const newYears = years.map((year) => year + 12);
+		setYears(newYears);
+	};
+
+	const changePickingDateStageHandler = (isFirstStage) => {
+		setShowArrows(isFirstStage);
+	};
+
 	return (
 		<div className={classes.picker}>
-			<FontAwesomeIcon className={classes.icon} icon={faAngleLeft} />
+			{showArrows && (
+				<FontAwesomeIcon
+					onClick={previousYearsHandler}
+					className={classes.icon}
+					icon={faAngleLeft}
+				/>
+			)}
 			<div className={classes.dates}>
-				<PickerOptions onPick={dataPickHandler} values={years} />
+				<PickerOptions
+					setArrowsShow={changePickingDateStageHandler}
+					onPick={dataPickHandler}
+					values={years}
+				/>
 			</div>
-			<FontAwesomeIcon className={classes.icon} icon={faAngleRight} />
+			{showArrows && (
+				<FontAwesomeIcon
+					onClick={nextYearsHandler}
+					className={classes.icon}
+					icon={faAngleRight}
+				/>
+			)}
 		</div>
 	);
 };

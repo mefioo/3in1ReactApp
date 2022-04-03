@@ -12,6 +12,8 @@ const datePickerReducer = (state, action) => {
 			return { year: action.year, month: state.month };
 		case 'months':
 			return { year: state.year, month: action.month };
+		case 'reset':
+			return { year: '', month: '' };
 		default:
 			throw new Error('Something went wrong!');
 	}
@@ -25,7 +27,6 @@ const PickerOptions = (props) => {
 	const dispatch = useDispatch();
 
 	const elementSelectHandler = (event) => {
-		console.log(datePickerState);
 		if (datePickerState.year === '') {
 			dispatchDatePicker({ type: 'years', year: event.target.value });
 		} else if (datePickerState.month === '') {
@@ -35,11 +36,15 @@ const PickerOptions = (props) => {
 
 	useEffect(() => {
 		const { year, month } = datePickerState;
+		if (year !== '' && month === '') {
+			props.setArrowsShow(false);
+		}
 		if (month !== '') {
 			dispatch(changeMonthData(months.indexOf(month), year));
-            props.onPick(true);
+			props.onPick(true);
+			props.setArrowsShow(true);
 		}
-	}, [datePickerState, dispatch]);
+	}, [datePickerState, dispatch, props]);
 
 	const yearsContent = props.values.map((element) => (
 		<button value={element} onClick={elementSelectHandler} key={element}>

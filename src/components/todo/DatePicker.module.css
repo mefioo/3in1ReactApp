@@ -2,7 +2,7 @@
 	position: absolute;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	width: 25vw;
 	height: 20vh;
@@ -29,4 +29,5 @@
 
 .icon {
 	margin: 0 10px;
+	cursor: pointer;
 }

@@ -1,12 +1,27 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import classes from './CalendarContent.module.css';
 import CalendarDateElement from './CalendarDateElement';
+import { todoActions } from '../../store/todo-slice';
+import AddToDoModal from '../UI-helpers/AddToDoModal';
 
 const CalendarContent = () => {
 	const calendar = useSelector((state) => state.calendar);
-	const calendarContent = [];
+	const todo = useSelector((state) => state.todo);
+	const dispatch = useDispatch();
+
+	let calendarContent = [];
 	let weekNumberIndex = calendar.currentMonthData.firstDayWeekNumber;
+
+	const onDateClick = (value) => {
+		const date = {
+			day: value,
+			month: calendar.currentMonthData.monthNumberDisplayed,
+			year: calendar.currentMonthData.yearNumberDisplayed,
+		};
+		dispatch(todoActions.getToDoData({ date }));
+	};
+
 	calendar.currentMonthData.monthData.forEach((week) => {
 		const weekNumber = (
 			<CalendarDateElement
@@ -39,6 +54,7 @@ const CalendarContent = () => {
 					className={className}
 					key={day.day}
 					value={day.day}
+					onClick={onDateClick}
 				/>
 			);
 		});
@@ -62,6 +78,7 @@ const CalendarContent = () => {
 		<div className={classes.content}>
 			{description}
 			{calendarContent}
+			{todo.isOpen && <AddToDoModal />}
 		</div>
 	);
 };
