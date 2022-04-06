@@ -7,7 +7,7 @@
 	font-size: 50px;
 	display: flex;
 	align-items: center;
-	justify-content: end;
+	justify-content: flex-end;
 	text-align: right;
 }
 

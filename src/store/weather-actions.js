@@ -1,6 +1,5 @@
 import { weatherActions } from './weather-slice';
 import { errorActions } from './error-slice';
-import { API_KEY } from '../to-ignore';
 
 const determineWindDirection = (deg) => {
 	if (deg >= 337.5 || deg < 22.5) return 'North';
@@ -57,9 +56,9 @@ const setErrorData = (errorCode) => {
 	return errorData;
 };
 
-export const getWeatherData = (city) => {
+export const getWeatherData = (city, apiKey) => {
 	return async (dispatch) => {
-		const link = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
+		const link = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
 
 		const fetchData = async () => {
 			const response = await fetch(link);

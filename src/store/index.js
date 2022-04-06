@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import apiSlice from './api-slice';
 import calcSlice from './calc-slice';
 import calendarSlice from './calendar-slice';
 import errorSlice from './error-slice';
@@ -12,6 +13,7 @@ const store = configureStore({
 		error: errorSlice.reducer,
 		weather: weatherSlice.reducer,
 		todo: todoSlice.reducer,
+		api: apiSlice.reducer,
 	},
 });
 

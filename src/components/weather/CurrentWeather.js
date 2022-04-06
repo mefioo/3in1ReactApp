@@ -21,10 +21,13 @@ import { months } from '../../dateAndTimeHelpers';
 
 const CurrentWeather = () => {
 	const dispatch = useDispatch();
+	const apiKey = useSelector((state) => state.api.apiKey);
 
 	useEffect(() => {
-		dispatch(getWeatherData('Wroclaw'));
-	}, [dispatch]);
+		if (apiKey !== '') {
+			dispatch(getWeatherData('Wroclaw', apiKey));
+		}
+	}, [dispatch, apiKey]);
 
 	const data = useSelector((state) => state.weather);
 	const weatherData = {
