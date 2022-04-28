@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/3in1ReactApp/static/css/main.ab4fee6b.css",
+    "main.js": "/3in1ReactApp/static/js/main.208494bb.js",
+    "static/js/787.ad6b50a6.chunk.js": "/3in1ReactApp/static/js/787.ad6b50a6.chunk.js",
+    "static/media/wroclaw.jpg": "/3in1ReactApp/static/media/wroclaw.f0c3dbbdd445c76f6261.jpg",
+    "index.html": "/3in1ReactApp/index.html",
+    "main.ab4fee6b.css.map": "/3in1ReactApp/static/css/main.ab4fee6b.css.map",
+    "main.208494bb.js.map": "/3in1ReactApp/static/js/main.208494bb.js.map",
+    "787.ad6b50a6.chunk.js.map": "/3in1ReactApp/static/js/787.ad6b50a6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ab4fee6b.css",
+    "static/js/main.208494bb.js"
+  ]
+}
